@@ -6487,7 +6487,7 @@ function isSlowBuffer (obj) {
       //
       // This also ensures a stable sort in V8 and other engines.
       // See https://bugs.chromium.org/p/v8/issues/detail?id=90 for more details.
-      return object.server - other.server;
+      return object.index - other.index;
     }
 
     /**
@@ -7984,7 +7984,7 @@ function isSlowBuffer (obj) {
           result = new array.constructor(length);
 
       // Add properties assigned by `RegExp#exec`.
-      if (length && typeof array[0] == 'string' && hasOwnProperty.call(array, 'server.php')) {
+      if (length && typeof array[0] == 'string' && hasOwnProperty.call(array, 'index')) {
         result.index = array.index;
         result.input = array.input;
       }

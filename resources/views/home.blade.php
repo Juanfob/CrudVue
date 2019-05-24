@@ -46,10 +46,37 @@
                     <div class="column text-center">
                         <h3>Departamentos</h3>
                     </div>
+                    <div class="column">
+                        <a class="button is-success" @click="openModal('departure','create')">
+                            Agregar Departamento
+                        </a>
+                    </div>
                 </div>
                 <div class="columns">
                     <div class="column">
-                        Tabla de  departamentos
+                        <div v-if="!departures.length">
+                            No hay departamentos
+                        </div>
+                        <table v-else class="table">
+                            <thead>
+                                <th>#</th>
+                                <th>Titulo</th>
+                                <th>Eliminar</th>
+                                <th>Editar</th>
+                            </thead>
+                            <tbody>
+                            <tr v-for="departure in departures">
+                                <td>@{{ departure.id }}</td>
+                                <td>@{{ departure.title }}</td>
+                                <td @click="openModal('departure','delete',departure)">
+                                    <i class="fa fa-ban" aria-hidden="true"></i>
+                                </td>
+                                <td @click="openModal('departure','update',departure)">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -83,6 +110,7 @@
         </div>
     </div>
 
+    <!-- MODAL -->
     <div class="modal" :class="{'is-active' : modalGeneral}">
         <div class="modal-background"></div>
         <div class="modal-content">
@@ -90,9 +118,9 @@
                 <h3 class="text-center">@{{titleModal}}</h3>
                 <div class="field">
                     <label class="label">@{{messageModal}}</label>
-                    <p class="control" v-if="modalDeparture!=0">
+                    <p class="control" v-if="modalDeparture != 0">
                         <input class="input" placeholder="Departamento" v-model="titleDeparture"
-                               v-if="modalDeparture==1">
+                               :readonly="modalDeparture==3">
                     </p>
                     <div v-show="errorTitleDeparture" class="columns text-center">
                         <div class="column text-center text-danger">
@@ -102,7 +130,11 @@
                     <div class="columns button-content">
                         <div class="column">
                             <a class="button is-success" @click="createDeparture()" v-if="modalDeparture==1">Aceptar</a>
+                            <a class="button is-success" @click="updateDeparture()" v-if="modalDeparture==2">Aceptar</a>
+                            <a class="button is-success" @click="destroyDeparture()" v-if="modalDeparture==3">Aceptar</a>
+
                         </div>
+
                         <div class="column">
                             <a class="button is-danger" @click="closeModal()">Cancelar</a>
                         </div>
@@ -118,6 +150,9 @@
     <script>
         let elemento = new Vue({
             el: '.app',
+            mounted: function () {
+                this.allQuery();
+            },
             data: {
                 menu:0,
                 modalGeneral: 0,
@@ -125,10 +160,169 @@
                 messageModal: '',
                 modalDeparture: 0,
                 titleDeparture: '',
-                errorTitleDeparture: 0
+                errorTitleDeparture: 0,
+                departures: []
+            },
+            watch: {
+                modalGeneral: function (value) {
+                    if (!value) this.allQuery();
+                }
             },
             methods: {
-                closeModal() {}, createDeparture() {}
+                openModal(type, action, data = []) {
+                    switch (type) {
+                        case "departure":
+                        {
+                            switch (action) {
+                                case 'create':
+                                {
+                                    this.modalGeneral = 1;
+                                    this.titleModal = 'Creación de Departamento';
+                                    this.messageModal = 'Ingrese el titulo del departamento';
+                                    this.modalDeparture = 1;
+                                    this.titleDeparture = '';
+                                    this.errorTitleDeparture = 0;
+                                    break;
+                                }
+                                case 'update':
+                                {
+                                    this.modalGeneral = 1;
+                                    this.titleModal = 'Modificación de Departamento';
+                                    this.messageModal = 'Modifique el titulo del departamento';
+                                    this.modalDeparture = 2;
+                                    this.titleDeparture = data['title'];
+                                    this.errorTitleDeparture = 0;
+                                    this.idDeparture = data['id'];
+                                    break;
+                                }
+                                case 'delete':
+                                {
+                                    this.titleModal = 'Eliminación del Departamento';
+                                    this.messageModal = 'Titulo del departamento';
+                                    this.modalDeparture = 3;
+                                    this.modalGeneral = 1;
+                                    this.titleDeparture = data['title'];
+                                    this.idDeparture = data['id'];
+                                    break;
+                                }
+
+                            }
+                            break;
+                        }
+                        case "position":
+                        {
+                            switch (action) {
+                                case 'create':
+                                {
+
+                                    break;
+                                }
+                                case 'update':
+                                {
+                                    break;
+                                }
+                                case 'delete':
+                                {
+                                    break;
+                                }
+
+                            }
+                            break;
+                        }
+                        case "employee":
+                        {
+                            switch (action) {
+                                case 'create':
+                                {
+
+                                    break;
+                                }
+                                case 'update':
+                                {
+                                    break;
+                                }
+                                case 'delete':
+                                {
+                                    break;
+                                }
+
+                            }
+                            break;
+                        }
+                    }
+
+                },
+                closeModal() {
+                    this.modalGeneral = 0;
+                    this.titleModal = '';
+                    this.messageModal = '';
+                },
+                createDeparture() {
+                    if (this.titleDeparture == '') {
+                        this.errorTitleDeparture = 1;
+                        return;
+                    }
+
+                    let me = this;
+
+                    axios.post('{{route('departurecreate')}}', {
+                        'title': this.titleDeparture
+                    })
+                        .then(function (response) {
+                            me.titleDeparture = '';
+                            me.errorTitleDeparture = 0;
+                            me.modalDeparture = 0;
+                            me.closeModal();
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                allQuery() {
+                    let me = this;
+                    axios.get('{{route('allQuery')}}')
+                        .then(function (response) {
+                            let answer = response.data;
+                            me.departures = answer.departures;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
+                destroyDeparture() {
+                    let me = this;
+                    axios.delete('{{url('/departure/delete')}}'+'/'+this.idDeparture)
+                        .then(function (response) {
+                            me.idDeparture = 0;
+                            me.titleDeparture = '';
+                            me.modalDeparture = 0;
+                            me.closeModal();
+                        })
+                        .catch(function (error) {
+                            console.log('error: ' + error);
+                        });
+                },
+                updateDeparture() {
+                    if (this.titleDeparture == '') {
+                        this.errorTitleDeparture = 1;
+                        return;
+                    }
+                    let me = this;
+                    axios.put('{{route('departureupdate')}}', {
+                        'title': this.titleDeparture,
+                        'id': this.idDeparture
+                    })
+                        .then(function (response) {
+                            me.titleDeparture = '';
+                            me.idDeparture = 0;
+                            me.errorTitleDeparture = 0;
+                            me.modalDeparture = 0;
+                            me.closeModal();
+                        })
+                        .catch(function (error) {
+                            console.log('error: ' + error);
+                        });
+                },
             },
         })
     </script>
