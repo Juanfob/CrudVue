@@ -2,25 +2,21 @@
 
 @-webkit-keyframes spinAround {
   from {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
 
   to {
-    -webkit-transform: rotate(359deg);
-            transform: rotate(359deg);
+    transform: rotate(359deg);
   }
 }
 
 @keyframes spinAround {
   from {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
 
   to {
-    -webkit-transform: rotate(359deg);
-            transform: rotate(359deg);
+    transform: rotate(359deg);
   }
 }
 
@@ -2369,8 +2365,7 @@ input[type=submit].button {
   height: 0.5em;
   pointer-events: none;
   position: absolute;
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
+  transform: rotate(-45deg);
   width: 0.5em;
   margin-top: -0.375em;
   right: 1.125em;
@@ -2565,8 +2560,7 @@ input[type=submit].button {
   position: absolute;
   right: 0.625em;
   top: 0.625em;
-  -webkit-transform: none;
-          transform: none;
+  transform: none;
 }
 
 .select.is-loading.is-small:after {
@@ -3643,10 +3637,8 @@ input[type=submit].button {
   left: 50%;
   position: absolute;
   top: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
-          transform: translateX(-50%) translateY(-50%) rotate(45deg);
-  -webkit-transform-origin: center center;
-          transform-origin: center center;
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  transform-origin: center center;
 }
 
 .delete:before {
@@ -4471,10 +4463,8 @@ a.dropdown-item.is-active {
   left: 50%;
   position: absolute;
   top: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
-          transform: translateX(-50%) translateY(-50%) rotate(45deg);
-  -webkit-transform-origin: center center;
-          transform-origin: center center;
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  transform-origin: center center;
 }
 
 .modal-close:before {
@@ -4609,9 +4599,7 @@ a.dropdown-item.is-active {
   position: absolute;
   top: 50%;
   transition: none 86ms ease-out;
-  transition-property: background, left, opacity, -webkit-transform;
   transition-property: background, left, opacity, transform;
-  transition-property: background, left, opacity, transform, -webkit-transform;
   width: 15px;
 }
 
@@ -4637,10 +4625,8 @@ a.dropdown-item.is-active {
 
 .nav-toggle.is-active span:nth-child(1) {
   margin-left: -5px;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-  -webkit-transform-origin: left top;
-          transform-origin: left top;
+  transform: rotate(45deg);
+  transform-origin: left top;
 }
 
 .nav-toggle.is-active span:nth-child(2) {
@@ -4649,10 +4635,8 @@ a.dropdown-item.is-active {
 
 .nav-toggle.is-active span:nth-child(3) {
   margin-left: -5px;
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
-  -webkit-transform-origin: left bottom;
-          transform-origin: left bottom;
+  transform: rotate(-45deg);
+  transform-origin: left bottom;
 }
 
 @media screen and (min-width: 769px), print {
@@ -4863,9 +4847,7 @@ a.nav-item:not(.button).is-tab.is-active {
   position: absolute;
   top: 50%;
   transition: none 86ms ease-out;
-  transition-property: background, left, opacity, -webkit-transform;
   transition-property: background, left, opacity, transform;
-  transition-property: background, left, opacity, transform, -webkit-transform;
   width: 15px;
 }
 
@@ -4891,10 +4873,8 @@ a.nav-item:not(.button).is-tab.is-active {
 
 .navbar-burger.is-active span:nth-child(1) {
   margin-left: -5px;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-  -webkit-transform-origin: left top;
-          transform-origin: left top;
+  transform: rotate(45deg);
+  transform-origin: left top;
 }
 
 .navbar-burger.is-active span:nth-child(2) {
@@ -4903,10 +4883,8 @@ a.nav-item:not(.button).is-tab.is-active {
 
 .navbar-burger.is-active span:nth-child(3) {
   margin-left: -5px;
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
-  -webkit-transform-origin: left bottom;
-          transform-origin: left bottom;
+  transform: rotate(-45deg);
+  transform-origin: left bottom;
 }
 
 .navbar-menu {
@@ -5063,8 +5041,7 @@ a.navbar-item.is-active,
   .navbar-item.is-hoverable:hover .navbar-dropdown.is-boxed {
     opacity: 1;
     pointer-events: auto;
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
 
   .navbar-link::after {
@@ -5076,8 +5053,7 @@ a.navbar-item.is-active,
     height: 0.5em;
     pointer-events: none;
     position: absolute;
-    -webkit-transform: rotate(-45deg);
-            transform: rotate(-45deg);
+    transform: rotate(-45deg);
     width: 0.5em;
     margin-top: -0.375em;
     right: 1.125em;
@@ -5141,12 +5117,9 @@ a.navbar-item.is-active,
     opacity: 0;
     pointer-events: none;
     top: calc(100% + (-4px));
-    -webkit-transform: translateY(-5px);
-            transform: translateY(-5px);
+    transform: translateY(-5px);
     transition-duration: 86ms;
-    transition-property: opacity, -webkit-transform;
     transition-property: opacity, transform;
-    transition-property: opacity, transform, -webkit-transform;
   }
 
   .navbar-divider {
@@ -7040,8 +7013,7 @@ label.panel-block:hover {
   min-width: 100%;
   position: absolute;
   top: 50%;
-  -webkit-transform: translate3d(-50%, -50%, 0);
-          transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
 }
 
 .hero-video.is-transparent {

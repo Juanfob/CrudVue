@@ -127,6 +127,7 @@
                     <div class="column text-center">
                         <h3>Empleado</h3>
                     </div>
+
                     <div class="column">
                         Tabla Empleados
                     </div>
